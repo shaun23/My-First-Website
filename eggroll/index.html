@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="../favicon.ico">
 
     <title>Mr. EggRoll</title>
 
@@ -17,14 +17,32 @@
     <link href="../node_modules/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
     <!--Angularjs -->
     <script src="../node_modules/angular/angular.min.js"></script>
+    <!--MyApp -->
+    <script src="../app.js"></script>
+
+    <style type="text/css">
+      #the-container {
+        width:960px;
+        margin: 0 auto;
+      }
+    </style>
   </head>
 
-  <body role="document">
-    <div>
-      <label>Name:</label>
-      <input type="text" ng-model="yourName" placeholder="Enter a name here">
-      <hr>
-      <h1>Hello {{yourName}}!</h1>
+  <body ng-app='eggrollApp'>
+    <div id="the-container">
+		<div class="row" ng-controller='eggCtrl'>
+		   <div class="col-lg-4">
+			 <ul class="nav nav-pills nav-stacked" ng-repeat='option in options'>
+			   <li ng-click='test(option)' ng-class="{active: option.active}"><a href="#">{{option.name}}</a></li>
+			 </ul>
+		   </div>
+		   
+		   <div class="container col-lg-8">
+			 <div ng-view ng-show='options[0].active'>Home</div>
+			 <div ng-view ng-show='options[1].active'>Information</div>
+			 <div ng-view ng-show='options[2].active'>Menu</div>
+		  </div>
+		</div>
     </div>
   </body>
 </html>
